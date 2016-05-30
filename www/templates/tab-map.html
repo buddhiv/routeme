@@ -1,0 +1,29 @@
+<ion-view view-title="Map">
+  <ion-content ng-controller="MapCtrl" ng-init="initMap()">
+
+    <div id="map" data-tap-disabled="true" style="overflow: hidden"></div>
+
+    <div style="top: 10px; right: 10px; z-index: 100; position: absolute">
+      <button class="button icon ion-android-locate" ng-click="centerMap()"></button>
+    </div>
+    <div style="top: 65px; right: 10px; z-index: 100; position: absolute">
+      <button class="button icon ion-android-walk" ng-click="markRoute()"></button>
+    </div>
+    <div style="top: 120px; right: 10px; z-index: 100; position: absolute">
+      <button class="button icon ion-ios-undo" ng-click="clearRoute()"></button>
+    </div>
+    <div
+      style="top: 5px; left: 10px; z-index: 99; position: absolute; background-color: whitesmoke; padding-left: 5px; padding-right: 5px">
+      <h6>{{placename}}</h6>
+    </div>
+    <div
+      style="bottom: 10px; padding-left: 10px; padding-right: 10px; z-index: 99; position: absolute; max-height: 400px; overflow: scroll; width: 100%; ">
+      <ion-list>
+        <ion-item ng-repeat="result in geocodeResults" ng-click="placeMarker(result.geometry)">
+          {{result.formatted_address}}
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </ion-content>
+</ion-view>

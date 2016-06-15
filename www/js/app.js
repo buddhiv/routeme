@@ -80,15 +80,6 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
         }
       })
 
-      .state('tab.terms', {
-        url: '/terms',
-        views: {
-          'tab-more': {
-            templateUrl: 'templates/terms.html'
-          }
-        }
-      })
-
       .state('tab.account', {
         url: '/account',
         views: {
@@ -103,7 +94,8 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
         url: '/nearby',
         views: {
           'tab-more': {
-            templateUrl: 'templates/nearby.html'
+            templateUrl: 'templates/nearby.html',
+            controller: 'NearbyCtrl'
           }
         }
       })

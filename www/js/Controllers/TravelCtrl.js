@@ -31,5 +31,28 @@ angular.module('starter.controllers')
       });
     };
 
+    $scope.trueFunc = function () {
+      console.log("true func");
+
+      if ($scope.responseT) {
+        var firebaseRef = FirebaseService.getFirebaseService();
+        var travelRef = firebaseRef.child('travel');
+        var newTravelRef = travelRef.push();
+
+        var userid = $scope.authData.uid;
+        newTravelRef.set({
+          user: userid,
+          start: ,
+          through: {
+
+          },
+          end: ,
+          date:
+        });
+
+      }
+
+
+    }
 
   });

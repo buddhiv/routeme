@@ -2,7 +2,7 @@
   <ion-content ng-controller="TravelCtrl" ng-init="initTravel()">
 
     <div class="row">
-      <div ng-if="logged">
+      <div ng-if="logged" ng-init="trueFunc()">
         Travel data will be automatically synced with your account.
       </div>
       <div ng-if="!logged">

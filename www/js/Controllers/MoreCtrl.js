@@ -5,7 +5,7 @@
 angular.module('starter.controllers')
 
   .controller('MoreCtrl', function ($scope, $rootScope, CheckLoginService, FirebaseService) {
-
+  
     
   });
 

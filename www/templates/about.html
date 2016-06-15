@@ -1,5 +1,5 @@
 <ion-view view-title="About" id="about">
-  <ion-content class="has-header text-center">
+  <ion-content class="has-header text-center" ng-controller="AccountCtrl">
     <div>
       <img src="../img/logo.png" alt="logo" width="200" style="top: 50px; position: relative; "/>
 
@@ -12,6 +12,12 @@
         version: 1.0<br/>
         ionic version: 1.7.14<br/>
       </div>
+    </div>
+
+    <div class="row">
+      <button class="button button-block button-positive" ng-click="addData()">
+        Demo Button
+      </button>
     </div>
   </ion-content>
 </ion-view>

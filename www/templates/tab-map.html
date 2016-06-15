@@ -12,18 +12,17 @@
     <div style="top: 120px; right: 10px; z-index: 100; position: absolute">
       <button class="button icon ion-ios-undo" ng-click="clearRoute()"></button>
     </div>
-    <div
-      style="top: 5px; left: 10px; z-index: 99; position: absolute; background-color: whitesmoke; padding-left: 5px; padding-right: 5px">
-      <h6>{{placename}}</h6>
+    <div ng-click="placeMarker(currentplace)"
+         style="top: 10px; left: 10px; z-index: 99; position: absolute; background-color: whitesmoke; padding-left: 5px; padding-right: 5px">
+      <h6>{{currentplace.formatted_address}}</h6>
     </div>
     <div
-      style="bottom: 10px; padding-left: 10px; padding-right: 10px; z-index: 99; position: absolute; max-height: 400px; overflow: scroll; width: 100%; ">
+      style="bottom: 0px; padding: 10px; z-index: 99; position: absolute; max-height: 300px; overflow-x: scroll; overflow-y: hidden; width: 100%; ">
       <ion-list>
-        <ion-item ng-repeat="result in geocodeResults" ng-click="placeMarker(result.geometry)">
+        <ion-item ng-repeat="result in geocodeResults" ng-click="placeMarker(result)">
           {{result.formatted_address}}
         </ion-item>
       </ion-list>
     </div>
-
   </ion-content>
 </ion-view>

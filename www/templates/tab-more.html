@@ -1,22 +1,15 @@
 <ion-view view-title="More">
-  <ion-content class="has-header" ng-controller="MoreCtrl" ng-init="getLocation()">
-    <ion-list>
-      <ion-item class="item-avatar">
-        <img src="../img/buddhi.jpg"/>
-        Buddhi Vikasitha
-        <p>last at Galadhari Hotel, Colombo</p>
-      </ion-item>
-    </ion-list>
+  <ion-content class="has-header" ng-controller="AccountCtrl" ng-init="initMore()">
 
     <ion-list>
       <ion-item class="item-divider">RouteMe</ion-item>
 
-      <ion-item ui-sref="" class="item-icon-left">
+      <ion-item class="item-icon-left" ui-sref="tab.nearby">
         <i class="icon ion-ionic"></i>
         Nearby
       </ion-item>
 
-      <ion-item ui-sref="" class="item-icon-left">
+      <ion-item class="item-icon-left">
         <i class="icon ion-clock"></i>
         Recent
       </ion-item>
@@ -25,17 +18,11 @@
     <ion-list>
       <ion-item class="item-divider">Manage
       </ion-item>
-      <ion-item ui-sref="">
+      <ion-item ui-sref="tab.account">
         Account
       </ion-item>
-      <ion-item ui-sref="more.about">
+      <ion-item ui-sref="tab.about">
         About
-      </ion-item>
-      <ion-item ui-sref="">
-        Terms &amp; Conditions
-      </ion-item>
-      <ion-item ui-sref="">
-        Logout
       </ion-item>
     </ion-list>
   </ion-content>

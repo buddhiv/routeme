@@ -1,0 +1,47 @@
+<ion-view view-title="Account" id="account">
+
+  <ion-content class="has-header" ng-controller="AccountCtrl" ng-init="checkLogin()">
+
+    <div ng-if="logged">
+      <ion-list>
+        <ion-item class="item-avatar">
+          <img src="{{imageUrl}}" alt="avatar"/>
+          logged in as<br/>
+          {{userName}}
+          {{userEmail}}
+        </ion-item>
+      </ion-list>
+
+      <div class="text-center" style="margin: 10px">
+        <button type="submit" class="button button-block button-positive" ng-click="logoutUser()">
+          Log Out
+        </button>
+      </div>
+    </div>
+
+    <div ng-if="!logged">
+      <div style="top: 50px; position: absolute">
+
+        <div class="row">
+          <div class="col" style="text-align: center">
+            You have not logged in.
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" style="">
+            By logging on, you can keep your travel data with your companion RouteMe. Use your Google credentials to
+            login to RouteMe.
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="button button-clear button-block" ng-click="loginUser()">
+            <img src="../img/google-logo.png" alt="google-logo" width="50" height="50"/>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

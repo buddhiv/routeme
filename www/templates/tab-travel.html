@@ -1,9 +1,30 @@
-<ion-view view-title="Travel">
-  <ion-content>
-    <ion-list>
-      <ion-item>
+<ion-view view-title="Travel" cache-view="false">
+  <ion-content ng-controller="TravelCtrl" ng-init="initTravel()">
 
+    <div class="row">
+      <div ng-if="logged">
+        Travel data will be automatically synced with your account.
+      </div>
+      <div ng-if="!logged">
+        Login to sync your travel data.
+      </div>
+    </div>
+
+    <ion-list style="position: absolute; top: 20px; padding: 10px; z-index: 99; width: 100%">
+      <ion-item ng-repeat="leg in responseT.routes[0].legs"
+                style="text-overflow: clip; white-space: normal !important">
+        <p>{{leg.steps[0].instructions | HtmlToTextFilter}}</p>
       </ion-item>
     </ion-list>
+
+    <ion-list style="position: absolute; bottom: 0px; padding: 10px; z-index: 99; width: 100%">
+      <ion-item>
+        From: <b>{{start}}</b>
+      </ion-item>
+      <ion-item>
+        To: <b>{{end}}</b>
+      </ion-item>
+    </ion-list>
+
   </ion-content>
 </ion-view>

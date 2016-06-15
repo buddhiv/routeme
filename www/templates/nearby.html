@@ -1,0 +1,48 @@
+<ion-view view-title="Nearby" id="nearby">
+  <ion-content class="has-header text-center" ng-controller="NearbyCtrl" ng-init="initNearby()">
+
+    <div class="row">
+      <div class="list" style="width: 100%">
+
+        <label class="item item-input item-select" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+          <div class="input-label">
+            Select Type
+          </div>
+          <select id="typeSelector">
+            <option>All</option>
+            <option>Establishments</option>
+            <option>Addresses</option>
+            <option>Geocodes</option>
+          </select>
+        </label>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="list list-inset" style="width: 100%">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search" id="autocompleteCombo" ng-keyup="autocomplete()">
+        </label>
+      </div>
+    </div>
+
+    <div ng-if="placeDetails">
+      <div class="row">
+        <div class="list card" style="width: 100%;">
+
+          <a class="item item-icon-left">
+            <i class="icon ion-ios-navigate"></i>
+            {{placeDetails.formatted_address}}
+          </a>
+          <div class="item item-body">
+            <img class="full-image" src="{{placeDetails.photos[0].getUrl}}"/>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

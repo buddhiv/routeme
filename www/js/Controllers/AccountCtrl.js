@@ -71,27 +71,4 @@ angular.module('starter.controllers')
       $state.go('tab.account');
     }
 
-    $scope.addData = function () {
-      console.log('add data');
-
-      var fbRef = new Firebase("https://routeme.firebaseio.com");
-
-      var studentsRef = fbRef.child("students");
-
-      var newStudentRef = studentsRef.push();
-      newStudentRef.set({
-        name: "Buddhi Vikasitha",
-        address: "Akuressa",
-        age: 30
-      }, function (error) {
-        if (error) {
-          console.log("error");
-        } else {
-          console.log("no error");
-        }
-      });
-
-
-    }
-
   });

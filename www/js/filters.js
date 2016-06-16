@@ -8,4 +8,6 @@ angular.module('starter.filters', [])
     return function (text) {
       return text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
-  });
+  })
+
+.filter();

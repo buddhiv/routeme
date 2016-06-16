@@ -9,10 +9,6 @@ angular.module('starter.controllers')
     $scope.initTravel = function () {
       $scope.logged = CheckLoginService.isLogged();
 
-      if ($scope.logged) {
-        $scope.authData = CheckLoginService.getAuthData();
-
-      }
 
       $scope.responseT = null;
       $scope.start = null;
@@ -34,47 +30,49 @@ angular.module('starter.controllers')
         console.log("true func");
 
         if ($scope.responseT) {
-          console.log("has response");
-          console.log($scope.responseT);
-          console.log($scope.responseT.routes[0]);
+          if ($scope.logged) {
+            $scope.authData = CheckLoginService.getAuthData();
 
-          var firebaseRef = new Firebase("https://routeme.firebaseio.com");
-          var travelRef = firebaseRef.child('travel');
-          var newTravelRef = travelRef.push();
+            console.log("has response");
 
-          var userid = $scope.authData.uid;
-          console.log(userid);
+            var firebaseRef = new Firebase("https://routeme.firebaseio.com");
+            var travelRef = firebaseRef.child('travel');
+            var newTravelRef = travelRef.push();
 
-          var today = new Date();
-          var dd = today.getDate();
-          var mm = today.getMonth() + 1;
-          var yyyy = today.getFullYear();
+            var userid = $scope.authData.uid;
+            console.log(userid);
 
-          console.log($scope.responseT.routes[0].legs.length + " l length");
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
 
-          var throughPoints = [];
-          for (i = 0; i < $scope.responseT.routes[0].legs.length; i++) {
-            for (j = 0; j < $scope.responseT.routes[0].legs[i].steps.length; j++) {
-              throughPoints.push($scope.responseT.routes[0].legs[i].steps[j].instructions);
+            console.log($scope.responseT.routes[0].legs.length + " l length");
+
+            var throughPoints = [];
+            for (i = 0; i < $scope.responseT.routes[0].legs.length; i++) {
+              for (j = 0; j < $scope.responseT.routes[0].legs[i].steps.length; j++) {
+                throughPoints.push($scope.responseT.routes[0].legs[i].steps[j].instructions);
+              }
             }
+
+            newTravelRef.set({
+              user: userid,
+              start: $scope.start,
+              through: throughPoints,
+              end: $scope.end,
+              year: yyyy,
+              month: mm,
+              date: dd
+            }, function (error) {
+              if (error) {
+                console.log("error");
+              } else {
+                console.log("no error");
+              }
+            });
+
           }
-
-          newTravelRef.set({
-            user: userid,
-            start: $scope.start,
-            through: throughPoints,
-            end: $scope.end,
-            year: yyyy,
-            month: mm,
-            date: dd
-          }, function (error) {
-            if (error) {
-              console.log("error");
-            } else {
-              console.log("no error");
-            }
-          });
-
         } else {
           console.log("has no response");
         }

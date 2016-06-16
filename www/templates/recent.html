@@ -1,5 +1,34 @@
-<ion-view  view-title="Recent" id="recent">
-  <ion-content>
+<ion-view view-title="Recent" id="recent">
+  <ion-content class="has-header" ng-controller="RecentCtrl" ng-init="initRecent()">
+    <div ng-if="logged">
+      <ion-list>
+        <ion-item class="item-avatar">
+          <img src="{{imageUrl}}" alt="avatar"/>
+          logged in as<br/>
+          <strong>{{userName}}</strong>
+          {{userEmail}}
+        </ion-item>
+      </ion-list>
 
+      <div class="row">
+        Recent travels.
+      </div>
+
+      <ion-list>
+        <div class="card">
+          <div class="item item-text-wrap" ng-repeat="travel in travelValues" ng-click="travelDetails(travel)">
+            From: {{travel.start}}<br/>
+            To: {{travel.end}}<br/>
+            <p style="text-align: right">on {{travel.date}}.{{travel.month}}.{{travel.year}}</p>
+          </div>
+        </div>
+      </ion-list>
+    </div>
+
+    <div ng-if="!logged">
+      <div class="row">
+        Login to view the travelling history.
+      </div>
+    </div>
   </ion-content>
 </ion-view>

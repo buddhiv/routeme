@@ -90,6 +90,26 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
         }
       })
 
+      .state('tab.recent', {
+        url: '/recent',
+        views: {
+          'tab-more': {
+            templateUrl: 'templates/recent.html',
+            controller: 'RecentCtrl'
+          }
+        }
+      })
+
+      .state('tab.traveldetails', {
+        url: '/traveldetails',
+        views: {
+          'tab-more': {
+            templateUrl: 'templates/traveldetails.html',
+            controller: 'RecentCtrl'
+          }
+        }
+      })
+
       .state('tab.nearby', {
         url: '/nearby',
         views: {

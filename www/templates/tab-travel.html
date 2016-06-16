@@ -1,30 +1,41 @@
 <ion-view view-title="Travel" cache-view="false">
   <ion-content ng-controller="TravelCtrl" ng-init="initTravel()">
 
-    <div class="row">
-      <div ng-if="logged" ng-init="trueFunc()">
-        Travel data will be automatically synced with your account.
+    <div ng-if="responseT">
+      <div class="row">
+        <div ng-if="logged">
+          Travel data will be automatically synced with your account.
+        </div>
+        <div ng-if="!logged">
+          Login to sync your travel data.
+        </div>
       </div>
-      <div ng-if="!logged">
-        Login to sync your travel data.
+
+      <ion-list style="position: absolute; top: 20px; padding: 10px; z-index: 99; width: 100%">
+        <div ng-repeat="leg in responseT.routes[0].legs">
+          <ion-item ng-repeat="step in leg.steps"
+                    style="text-overflow: clip; white-space: normal !important">
+            <p>{{step.instructions | HtmlToTextFilter}}</p>
+          </ion-item>
+        </div>
+      </ion-list>
+
+      <div ng-if="start">
+        <div ng-if="end">
+
+          <!--<ion-list style="position: absolute; bottom: 0px; padding: 10px; z-index: 99; width: 100%">-->
+          <ion-list style="padding: 10px; width: 100%">
+            <ion-item>
+              From: <b>{{start}}</b>
+            </ion-item>
+            <ion-item>
+              To: <b>{{end}}</b>
+            </ion-item>
+          </ion-list>
+
+        </div>
       </div>
     </div>
-
-    <ion-list style="position: absolute; top: 20px; padding: 10px; z-index: 99; width: 100%">
-      <ion-item ng-repeat="leg in responseT.routes[0].legs"
-                style="text-overflow: clip; white-space: normal !important">
-        <p>{{leg.steps[0].instructions | HtmlToTextFilter}}</p>
-      </ion-item>
-    </ion-list>
-
-    <ion-list style="position: absolute; bottom: 0px; padding: 10px; z-index: 99; width: 100%">
-      <ion-item>
-        From: <b>{{start}}</b>
-      </ion-item>
-      <ion-item>
-        To: <b>{{end}}</b>
-      </ion-item>
-    </ion-list>
 
   </ion-content>
 </ion-view>

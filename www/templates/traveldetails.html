@@ -1,0 +1,19 @@
+<ion-view view-title="Travel Details" id="traveldetails">
+  <ion-content class="has-header" ng-controller="RecentCtrl" ng-init="initTravelDetails()">
+
+    <ion-list>
+      <ion-item>
+        From: {{travel.start}}<br/>
+        To: {{travel.end}}
+        <p style="text-align: right">on {{travel.date}}.{{travel.month}}.{{travel.year}}</p>
+      </ion-item>
+    </ion-list>
+
+    <div class="card">
+      <div class="item item-text-wrap" ng-repeat="t in travel.through track by $index">
+        {{t | HtmlToTextFilter}}<br/>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

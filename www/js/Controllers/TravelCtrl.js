@@ -11,6 +11,7 @@ angular.module('starter.controllers')
 
       if ($scope.logged) {
         $scope.authData = CheckLoginService.getAuthData();
+
       }
 
       $scope.responseT = null;
@@ -20,6 +21,7 @@ angular.module('starter.controllers')
       $scope.$evalAsync(function () {
         $scope.responseT = RouteResponseService.getResponse();
 
+        console.log("responseT");
         console.log($scope.responseT);
 
         $scope.start = RouteStartEndService.getStart();
@@ -28,31 +30,55 @@ angular.module('starter.controllers')
         console.log($scope.end + "end");
         console.log($scope.start + "start");
 
+        /////////////////////////////////////////////////////////////
+        console.log("true func");
+
+        if ($scope.responseT) {
+          console.log("has response");
+          console.log($scope.responseT);
+          console.log($scope.responseT.routes[0]);
+
+          var firebaseRef = new Firebase("https://routeme.firebaseio.com");
+          var travelRef = firebaseRef.child('travel');
+          var newTravelRef = travelRef.push();
+
+          var userid = $scope.authData.uid;
+          console.log(userid);
+
+          var today = new Date();
+          var dd = today.getDate();
+          var mm = today.getMonth() + 1;
+          var yyyy = today.getFullYear();
+
+          console.log($scope.responseT.routes[0].legs.length + " l length");
+
+          var throughPoints = [];
+          for (i = 0; i < $scope.responseT.routes[0].legs.length; i++) {
+            for (j = 0; j < $scope.responseT.routes[0].legs[i].steps.length; j++) {
+              throughPoints.push($scope.responseT.routes[0].legs[i].steps[j].instructions);
+            }
+          }
+
+          newTravelRef.set({
+            user: userid,
+            start: $scope.start,
+            through: throughPoints,
+            end: $scope.end,
+            year: yyyy,
+            month: mm,
+            date: dd
+          }, function (error) {
+            if (error) {
+              console.log("error");
+            } else {
+              console.log("no error");
+            }
+          });
+
+        } else {
+          console.log("has no response");
+        }
       });
     };
-
-    $scope.trueFunc = function () {
-      console.log("true func");
-
-      if ($scope.responseT) {
-        var firebaseRef = FirebaseService.getFirebaseService();
-        var travelRef = firebaseRef.child('travel');
-        var newTravelRef = travelRef.push();
-
-        var userid = $scope.authData.uid;
-        newTravelRef.set({
-          user: userid,
-          start: ,
-          through: {
-
-          },
-          end: ,
-          date:
-        });
-
-      }
-
-
-    }
 
   });

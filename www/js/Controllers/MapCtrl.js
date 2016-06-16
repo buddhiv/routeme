@@ -162,13 +162,6 @@ angular.module('starter.controllers')
 
             $scope.routeDisplaying = true;
 
-            // console.log("response1" + $scope.response);
-
-            // console.log("routes" + response.routes.length);
-            // console.log("legs" + response.routes[0].legs.length);
-            // console.log("steps" + response.routes[0].legs[0].steps[0].instructions);
-            // console.log("steps" + response.routes[0].legs[1].steps[0].instructions);
-            // console.log("steps" + response.routes[0].legs[2].steps[0].instructions);
           } else {
             console.log("status not OK");
           }
@@ -176,6 +169,7 @@ angular.module('starter.controllers')
 
         // show start and end for the route
         var geocoder = new google.maps.Geocoder;
+        
         // geocode the start location
         geocoder.geocode({'location': start}, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK) {

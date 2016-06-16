@@ -69,5 +69,18 @@ angular.module('starter.services', [])
         return firebaseService;
       }
     }
+  })
+
+  .service('TravelDetailsService', function ($rootScope) {
+    var travelDetails = null;
+
+    return {
+      setTravelDetails: function (travel) {
+        travelDetails = travel;
+      },
+      getTravelDetails: function () {
+        return travelDetails;
+      }
+    }
   });
 

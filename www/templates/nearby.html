@@ -32,12 +32,17 @@
       <div class="row">
         <div class="list card" style="width: 100%;">
 
-          <a class="item item-icon-left">
+          <a class="item item-icon-left" ng-click="gotoMap(placeDetails)">
             <i class="icon ion-ios-navigate"></i>
             {{placeDetails.formatted_address}}
           </a>
           <div class="item item-body">
-            <img class="full-image" src="{{placeDetails.photos[0].getUrl}}"/>
+            <div ng-if="placeDetails.photos[0].getUrl">
+              <img class="full-image" src="{{placeDetails.photos[0].getUrl}}"/>
+            </div>
+            <div ng-if="!placeDetails.photos[0].getUrl">
+              no image
+            </div>
           </div>
 
         </div>

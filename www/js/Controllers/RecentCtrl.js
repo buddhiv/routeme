@@ -23,13 +23,15 @@ angular.module('starter.controllers')
         ///////read data
         var fbRef = new Firebase("https://routeme.firebaseio.com/travel");
 
-        fbRef.on("value", function (snapshot) {
-          $scope.$evalAsync(function () {
-            $scope.travelValues = snapshot.val();
+        fbRef
+          .orderByChild("user").equalTo(authData.uid)
+          .on("value", function (snapshot) {
+            $scope.$evalAsync(function () {
+              $scope.travelValues = snapshot.val();
+            });
+          }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
           });
-        }, function (errorObject) {
-          console.log("The read failed: " + errorObject.code);
-        });
 
       } else {
         $scope.logged = false;

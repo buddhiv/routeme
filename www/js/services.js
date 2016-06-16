@@ -82,5 +82,18 @@ angular.module('starter.services', [])
         return travelDetails;
       }
     }
+  })
+
+  .service('NearbyLocationService', function ($rootScope) {
+    var location = null;
+
+    return {
+      setLocation: function (l) {
+        location = l;
+      },
+      getLocation: function () {
+        return location
+      }
+    }
   });
 

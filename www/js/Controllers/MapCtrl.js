@@ -5,7 +5,7 @@
 angular.module('starter.controllers')
 
   // map controller
-  .controller('MapCtrl', function ($scope, $ionicLoading, $compile, $state, $rootScope, RouteResponseService, RouteStartEndService) {
+  .controller('MapCtrl', function ($scope, $ionicLoading, $compile, $state, $rootScope, RouteResponseService, RouteStartEndService, NearbyLocationService) {
 
     $scope.markersArray = [];
     $scope.addressesArray = [];
@@ -63,6 +63,32 @@ angular.module('starter.controllers')
 
       //center the map on the current location
       $scope.centerMap();
+
+      //check nearby location variable
+      var place = NearbyLocationService.setLocation($scope.map);
+      // console.log(place)
+      // if (place) {
+      //   console.log(place)
+      //   if ($scope.directionsDisplay) {
+      //     $scope.$evalAsync(function () {
+      //
+      //       $scope.clearRoute();
+      //
+      //       var marker = new google.maps.Marker({
+      //         position: {
+      //           lat: place.geometry.location.lat(),
+      //           lng: place.geometry.location.lng()
+      //         },
+      //         map: $scope.map
+      //       });
+      //
+      //       console.log(place);
+      //
+      //       $scope.map.serCenter(place.geometry.location.lat(), place.geometry.location.lng());
+      //       $scope.markersArray[$scope.markersArray.length] = marker;
+      //     });
+      //   }
+      // }
     };
 
     // place a marker at the given location
@@ -169,7 +195,7 @@ angular.module('starter.controllers')
 
         // show start and end for the route
         var geocoder = new google.maps.Geocoder;
-        
+
         // geocode the start location
         geocoder.geocode({'location': start}, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
@@ -197,7 +223,6 @@ angular.module('starter.controllers')
             console.log('Geocoder failed for end');
           }
         });
-
       }
     };
 
@@ -229,7 +254,6 @@ angular.module('starter.controllers')
       var cmap = $scope.map;
       navigator.geolocation.getCurrentPosition(function (position) {
         cmap.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-        // cmap.setZoom(16);
       });
 
       $scope.updateCurrentLocationHeader();

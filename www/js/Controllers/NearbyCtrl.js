@@ -4,7 +4,7 @@
 
 angular.module('starter.controllers')
 
-  .controller('NearbyCtrl', function ($scope, $state) {
+  .controller('NearbyCtrl', function ($scope, $state, NearbyLocationService) {
 
     $scope.initNearby = function () {
 
@@ -14,23 +14,15 @@ angular.module('starter.controllers')
       });
     }
 
+    //autocomplete the dropdown suggestions
     $scope.autocomplete = function () {
-      console.log("type " + document.getElementById('autocompleteCombo').value);
+      // console.log("type " + document.getElementById('autocompleteCombo').value);
 
       var input = document.getElementById('autocompleteCombo');
       var types = document.getElementById('typeSelector');
 
-      // do layout
-      // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-      // map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
       var autocomplete = new google.maps.places.Autocomplete(input);
       autocomplete.bindTo('bounds', $scope.map);
-
-      // var marker = new google.maps.Marker({
-      //   map: map,
-      //   anchorPoint: new google.maps.Point(0, -29)
-      // });
 
       autocomplete.addListener('place_changed', function () {
         // marker.setVisible(false);
@@ -43,19 +35,8 @@ angular.module('starter.controllers')
         $scope.$evalAsync(function () {
           $scope.placeDetails = place;
         });
-        console.log(place);
 
         $state.go('tab.nearby');
-
-        // marker.setIcon(/** @type {google.maps.Icon} */({
-        //   url: place.icon,
-        //   size: new google.maps.Size(71, 71),
-        //   origin: new google.maps.Point(0, 0),
-        //   anchor: new google.maps.Point(17, 34),
-        //   scaledSize: new google.maps.Size(35, 35)
-        // }));
-        // marker.setPosition(place.geometry.location);
-        // marker.setVisible(true);
 
         var address = '';
         if (place.address_components) {
@@ -67,7 +48,23 @@ angular.module('starter.controllers')
         }
 
       });
+    }
 
+    $scope.gotoMap = function (placeDetails) {
+
+      $scope.map = NearbyLocationService.getLocation();
+
+      var marker = new google.maps.Marker({
+        position: {
+          lat: placeDetails.geometry.location.lat(),
+          lng: placeDetails.geometry.location.lng()
+        },
+        map: $scope.map
+      });
+
+      $scope.map.setCenter(new google.maps.LatLng(placeDetails.geometry.location.lat(), placeDetails.geometry.location.lng()));
+
+      $state.go('tab.map');
     }
   });
 
